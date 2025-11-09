@@ -14,7 +14,10 @@ const createBattery = async (batteryData) => {
 
 const getBatteries = async () => {
     try {
-        const batteries = await batteryModel.findAll({ raw: true });
+        const batteries = await batteryModel.findAll({ 
+            raw: true,
+            attributes: ['id', 'serial_number', 'platform_model', 'capacity', 'purchase_date', 'battery_status', 'notes']
+        });
         return batteries;
     } catch (error) {
         console.error('Error fetching batteries:', error.message);
@@ -24,7 +27,10 @@ const getBatteries = async () => {
 
 const getBatteryById = async (id) => {
     try {
-        const battery = await batteryModel.findByPk(id, { raw: true });
+        const battery = await batteryModel.findByPk(id, { 
+            raw: true,
+            attributes: ['id', 'serial_number', 'platform_model', 'capacity', 'purchase_date', 'battery_status', 'notes']
+        });
         return battery;
     } catch (error) {
         console.error('Error fetching battery by id:', error.message);
@@ -46,11 +52,27 @@ const updateBattery = async (id, batteryData) => {
     }
 };
 
+const deleteBattery = async (id) => {
+    try {
+        const battery = await batteryModel.findByPk(id);
+        if (!battery) {
+            return null;
+        }
+        const batteryData = battery.get({ plain: true });
+        await battery.destroy();
+        return batteryData;
+    } catch (error) {
+        console.error('Error deleting battery:', error.message);
+        throw error;
+    }
+};
+
 
 module.exports = {
     createBattery,
     getBatteries,
     getBatteryById,
-    updateBattery
+    updateBattery,
+    deleteBattery
 };
 
