@@ -9,7 +9,15 @@ console.log('Database connected');
 
 // sync database models
 var Battery = require('./models/Batteries');
-// add other database tables here ...
+var HealthCheck = require('./models/Health_Checks');
+var UsageLog = require('./models/Usage_Logs');
+var Attachment = require('./models/Attachments');
+var Status = require('./models/Status');
+var User = require('./models/Users');
+
+// Define model relationships
+const defineAssociations = require('./models/associations');
+defineAssociations();
 
 // views setup 
 var indexRouter = require('./routes/index');
