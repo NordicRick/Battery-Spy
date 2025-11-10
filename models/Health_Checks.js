@@ -8,12 +8,12 @@ const HealthCheck = sequelize.define('HealthCheck', {
         primaryKey: true,
         autoIncrement: true,
     },
-    battery_id: {
-        type: DataTypes.INTEGER,
+    battery_serial_number: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER, // change to just username 
         allowNull: false,
     },
     check_date: {
@@ -21,7 +21,7 @@ const HealthCheck = sequelize.define('HealthCheck', {
         allowNull: false,
     },
     internal_resistance: {
-        type: DataTypes.DECIMAL(2, 2), // 2 decimal places
+        type: DataTypes.DECIMAL(5, 2), // 5 total digits, 2 decimal places (allows 0.00 to 999.99)
         allowNull: false,
     },
     

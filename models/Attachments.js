@@ -8,8 +8,8 @@ const Attachment = sequelize.define('Attachment', {
         primaryKey: true,
         autoIncrement: true,
     },
-    battery_id: {
-        type: DataTypes.INTEGER,
+    battery_serial_number: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     uploaded_by: {

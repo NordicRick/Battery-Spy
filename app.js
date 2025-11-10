@@ -6,6 +6,11 @@ var logger = require('morgan');
 const sequelize = require('./config/database');
 console.log('Database connected'); 
 
+// load routes
+var indexRouter = require('./routes/index');
+var dashboardRouter = require('./routes/dashboard');
+var batteriesRouter = require('./routes/batteries');
+var healthChecksRouter = require('./routes/healthChecks');
 
 // sync database models
 var Battery = require('./models/Batteries');
@@ -19,10 +24,6 @@ var User = require('./models/Users');
 const defineAssociations = require('./models/associations');
 defineAssociations();
 
-// views setup 
-var indexRouter = require('./routes/index');
-var dashboardRouter = require('./routes/dashboard');
-var batteriesRouter = require('./routes/batteries');
 
 // sync database tables 
 async function syncDatabase() {
@@ -53,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/api/v1', batteriesRouter);
+app.use('/api/v1/batteries', healthChecksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

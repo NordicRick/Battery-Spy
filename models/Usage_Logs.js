@@ -8,8 +8,8 @@ const UsageLog = sequelize.define('UsageLog', {
         primaryKey: true,
         autoIncrement: true,
     },
-    battery_id: {
-        type: DataTypes.INTEGER,
+    battery_serial_number: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     user_id: {

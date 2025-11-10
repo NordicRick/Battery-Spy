@@ -1,7 +1,7 @@
 // controller takes the request, validates the data using Joi schema
 //  and uses the service functions to interact with the database
 
-const JoiBatterySchema = require('../validation/JSON_Validate.js'); 
+const { JoiBatterySchema } = require('../validation/JSON_Validate.js'); 
 const batteryService = require('../services/batteryService.js'); 
 
 // create battery controller function
@@ -64,17 +64,17 @@ const getBatteries = async (req, res) => {
     }
 };
 
-// get battery by id controller function
+// get battery by serial number controller function
 
-const getBatteryById = async (req, res) => {
+const getBatteryBySerialNumber = async (req, res) => {
     try {
-        const { id } = req.params;
-        const battery = await batteryService.getBatteryById(id);
+        const { serialNumber } = req.params;
+        const battery = await batteryService.getBatteryBySerialNumber(serialNumber);
         
         if (!battery) {
             return res.status(404).json({
                 success: false,
-                message: 'Battery not found please check the id',
+                message: 'Battery not found please check the serial number',
             });
         }
         
@@ -85,10 +85,10 @@ const getBatteryById = async (req, res) => {
         });
     }
     catch (error) {
-        console.error('Error fetching battery by id:', error.message);
+        console.error('Error fetching battery by serial number:', error.message);
         return res.status(500).json({
             success: false,
-            message: 'server error fetching battery by id',
+            message: 'server error fetching battery by serial number',
         });
     }
 };
@@ -97,7 +97,7 @@ const getBatteryById = async (req, res) => {
 
 const updateBattery = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { serialNumber } = req.params;
         
         // Validate the request body using the Joi schema
         const { error, value } = JoiBatterySchema.validate(req.body);
@@ -112,12 +112,12 @@ const updateBattery = async (req, res) => {
             });
         }
 
-        const battery = await batteryService.updateBattery(id, value);
+        const battery = await batteryService.updateBattery(serialNumber, value);
         
         if (!battery) {
             return res.status(404).json({
                 success: false,
-                message: 'Battery not found please check the id',
+                message: 'Battery not found please check the serial number',
             });
         }
         
@@ -140,13 +140,13 @@ const updateBattery = async (req, res) => {
 
 const deleteBattery = async (req, res) => {
     try {
-        const { id } = req.params;
-        const battery = await batteryService.deleteBattery(id);
+        const { serialNumber } = req.params;
+        const battery = await batteryService.deleteBattery(serialNumber);
         
         if (!battery) {
             return res.status(404).json({
                 success: false,
-                message: 'Battery not found please check the id',
+                message: 'Battery not found please check the serial number',
             });
         }
         
@@ -168,7 +168,7 @@ const deleteBattery = async (req, res) => {
 module.exports = {
     createBattery,
     getBatteries,
-    getBatteryById,
+    getBatteryBySerialNumber,
     updateBattery,
     deleteBattery
 }

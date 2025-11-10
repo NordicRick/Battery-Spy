@@ -7,16 +7,16 @@ const Status = require('./Status');
 
 const defineAssociations = () => {
     // Battery associations
-    Battery.hasMany(HealthCheck, { foreignKey: 'battery_id' });
-    Battery.hasMany(UsageLog, { foreignKey: 'battery_id' });
-    Battery.hasMany(Attachment, { foreignKey: 'battery_id' });
-    Battery.hasMany(Status, { foreignKey: 'battery_id' });
+    Battery.hasMany(HealthCheck, { foreignKey: 'battery_serial_number', sourceKey: 'serial_number' });
+    Battery.hasMany(UsageLog, { foreignKey: 'battery_serial_number', sourceKey: 'serial_number' });
+    Battery.hasMany(Attachment, { foreignKey: 'battery_serial_number', sourceKey: 'serial_number' });
+    Battery.hasMany(Status, { foreignKey: 'battery_serial_number', sourceKey: 'serial_number' });
     
     // BelongsTo associations
-    HealthCheck.belongsTo(Battery, { foreignKey: 'battery_id' });
-    UsageLog.belongsTo(Battery, { foreignKey: 'battery_id' });
-    Attachment.belongsTo(Battery, { foreignKey: 'battery_id' });
-    Status.belongsTo(Battery, { foreignKey: 'battery_id' });
+    HealthCheck.belongsTo(Battery, { foreignKey: 'battery_serial_number', targetKey: 'serial_number' });
+    UsageLog.belongsTo(Battery, { foreignKey: 'battery_serial_number', targetKey: 'serial_number' });
+    Attachment.belongsTo(Battery, { foreignKey: 'battery_serial_number', targetKey: 'serial_number' });
+    Status.belongsTo(Battery, { foreignKey: 'battery_serial_number', targetKey: 'serial_number' });
     
     // User associations
     //User.hasMany(Battery, { foreignKey: 'user_id' });

@@ -4,8 +4,8 @@ const batteriesController = require('../controllers/batteries');
 
 router.post('/batteries', batteriesController.createBattery);
 router.get('/batteries', batteriesController.getBatteries); 
-router.get('/batteries/:id', batteriesController.getBatteryById);
-router.put('/batteries/:id', batteriesController.updateBattery);
-router.delete('/batteries/:id', batteriesController.deleteBattery);
+router.get('/batteries/:serialNumber', batteriesController.getBatteryBySerialNumber);
+router.put('/batteries/:serialNumber', batteriesController.updateBattery);
+router.delete('/batteries/:serialNumber', batteriesController.deleteBattery);
 
 module.exports = router;

@@ -16,7 +16,7 @@ const getBatteries = async () => {
     try {
         const batteries = await batteryModel.findAll({ 
             raw: true,
-            attributes: ['id', 'serial_number', 'platform_model', 'capacity', 'purchase_date', 'battery_status', 'notes']
+            attributes: ['serial_number', 'platform_model', 'capacity', 'purchase_date', 'battery_status', 'notes']
         });
         return batteries;
     } catch (error) {
@@ -25,22 +25,22 @@ const getBatteries = async () => {
     }
 };
 
-const getBatteryById = async (id) => {
+const getBatteryBySerialNumber = async (serialNumber) => {
     try {
-        const battery = await batteryModel.findByPk(id, { 
+        const battery = await batteryModel.findByPk(serialNumber, { 
             raw: true,
-            attributes: ['id', 'serial_number', 'platform_model', 'capacity', 'purchase_date', 'battery_status', 'notes']
+            attributes: ['serial_number', 'platform_model', 'capacity', 'purchase_date', 'battery_status', 'notes']
         });
         return battery;
     } catch (error) {
-        console.error('Error fetching battery by id:', error.message);
+        console.error('Error fetching battery by serial number:', error.message);
         throw error;
     }
 };
 
-const updateBattery = async (id, batteryData) => {
+const updateBattery = async (serialNumber, batteryData) => {
     try {
-        const battery = await batteryModel.findByPk(id);
+        const battery = await batteryModel.findByPk(serialNumber);
         if (!battery) {
             return null;
         }
@@ -52,9 +52,9 @@ const updateBattery = async (id, batteryData) => {
     }
 };
 
-const deleteBattery = async (id) => {
+const deleteBattery = async (serialNumber) => {
     try {
-        const battery = await batteryModel.findByPk(id);
+        const battery = await batteryModel.findByPk(serialNumber);
         if (!battery) {
             return null;
         }
@@ -71,7 +71,7 @@ const deleteBattery = async (id) => {
 module.exports = {
     createBattery,
     getBatteries,
-    getBatteryById,
+    getBatteryBySerialNumber,
     updateBattery,
     deleteBattery
 };
