@@ -1,0 +1,76 @@
+<div class="card card-chart d-flex bg-dark text-white border-white border-1 rounded-2 h-50">
+    <div class="card-header bg-dark text-white border-white border-1 rounded-2">
+        <div class="row d-flex bg-dark text-white border-white border-1 rounded-2">
+            <div class="col-md-6 text-start bg-dark text-white border-white border-1 rounded-2">
+                <h5 class="card-title">Battery Editor</h5>
+                <h2 id="batterySerialNumber">Loading...</h2>
+            </div>
+            <div class="col-md-6 text-end">
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-dark">
+        <form id="editorForm">
+            <div class="form-group">
+                <label for="serialNumber">Serial Number</label>
+                <input type="text" class="form-control" id="serialNumber" readonly>
+            </div>
+            <div class="form-group">
+                <label for="platformModel">Platform Model</label>
+                <input type="text" class="form-control" id="platformModel">
+            </div>
+            <div class="form-group">
+                <label for="capacity">Capacity (mAh)</label>
+                <input type="number" class="form-control" id="capacity">
+            </div>
+            <div class="form-group">
+                <label for="purchaseDate">Purchase Date</label>
+                <input type="date" class="form-control" id="purchaseDate">
+            </div>
+            <div class="form-group">
+                <label for="batteryStatus">Status</label>
+                <select class="form-control" id="batteryStatus">
+                    <option value="active">Active</option>
+                    <option value="warning">Warning</option>
+                    <option value="retired">Retired</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" id="notes"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary">Cancel</button>
+        </form>
+    </div>
+</div>
+<div class="card card-chart d-flex bg-dark text-white border-white border-1 rounded-2 mt-5 shadows">
+    <div class="card-header text-white border-white border-1 rounded-2">
+        <div class="row d-flex text-white border-white border-1 rounded-2">
+            <div class="col-md-12 text-start bg-dark text-white border-white border-1 rounded-2" style="background-color: #373636;">
+                <h5 class="card-title">Battery Selector</h5>
+                <h4>Select a battery to edit</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-dark p-0" style="max-height: 400px; overflow-y: auto;">
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover mb-0" style="background-color: #373636;">
+                <thead class="sticky-top" style="background-color: #373636; z-index: 10;">
+                    <tr>
+                        <th>Serial Number</th>
+                        <th>Platform Model</th>
+                        <th>Capacity (mAh)</th>
+                        <th>Status</th>
+                        <th>Purchase Date</th>
+                    </tr>
+                </thead>
+                <tbody id="batteryTableBody">
+                    <tr>
+                        <td colspan="5" class="text-center">Loading batteries...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
