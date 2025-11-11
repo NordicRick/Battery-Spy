@@ -12,8 +12,8 @@ const UsageLog = sequelize.define('UsageLog', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    user_id: {
-        type: DataTypes.INTEGER,
+    user_name: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     usage_date: {

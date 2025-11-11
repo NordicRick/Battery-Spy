@@ -12,8 +12,8 @@ const Attachment = sequelize.define('Attachment', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    uploaded_by: {
-        type: DataTypes.INTEGER,
+    user_name: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     uploaded_at: {

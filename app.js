@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
 var batteriesRouter = require('./routes/batteries');
 var healthChecksRouter = require('./routes/healthChecks');
+var editorRouter = require('./routes/editor');
 
 // sync database models
 var Battery = require('./models/Batteries');
@@ -18,7 +19,7 @@ var HealthCheck = require('./models/Health_Checks');
 var UsageLog = require('./models/Usage_Logs');
 var Attachment = require('./models/Attachments');
 var Status = require('./models/Status');
-var User = require('./models/Users');
+/* var User = require('./models/Users'); */
 
 // Define model relationships
 const defineAssociations = require('./models/associations');
@@ -54,7 +55,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/api/v1', batteriesRouter);
-app.use('/api/v1/batteries', healthChecksRouter);
+app.use('/api/v1', healthChecksRouter);
+app.use('/editor', editorRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

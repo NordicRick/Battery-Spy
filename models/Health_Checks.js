@@ -12,8 +12,8 @@ const HealthCheck = sequelize.define('HealthCheck', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    user_id: {
-        type: DataTypes.INTEGER, // change to just username 
+    user_name: {
+        type: DataTypes.STRING, 
         allowNull: false,
     },
     check_date: {
@@ -23,6 +23,10 @@ const HealthCheck = sequelize.define('HealthCheck', {
     internal_resistance: {
         type: DataTypes.DECIMAL(5, 2), // 5 total digits, 2 decimal places (allows 0.00 to 999.99)
         allowNull: false,
+    },
+    notes: {
+        type: DataTypes.TEXT,
+        allowNull: true,
     },
     
 }, {

@@ -1,8 +1,8 @@
 // load modules and files 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+//const { DataTypes } = require('sequelize');
+//const sequelize = require('../config/database');
 
-const User = sequelize.define('User', {
+/* const User = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -34,4 +34,4 @@ const User = sequelize.define('User', {
     },
 });
 
-module.exports = User;
+/* module.exports = User; */

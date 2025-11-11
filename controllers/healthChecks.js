@@ -28,27 +28,6 @@ const createHealthCheck = async (req, res) => {
         });
     } catch (error) {
         console.error('Error creating health check:', error.message);
-        
-        // Handle foreign key constraint errors
-        if (error.name === 'SequelizeForeignKeyConstraintError' || error.parent?.code === 'ER_NO_REFERENCED_ROW_2') {
-            if (error.message.includes('user_id') || error.parent?.sqlMessage?.includes('user_id')) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'Invalid user_id: User does not exist',
-                });
-            }
-            if (error.message.includes('battery_serial_number') || error.parent?.sqlMessage?.includes('battery_serial_number')) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'Invalid battery_serial_number: Battery does not exist',
-                });
-            }
-            return res.status(400).json({
-                success: false,
-                message: 'Foreign key constraint error: Referenced record does not exist',
-            });
-        }
-        
         return res.status(500).json({
             success: false,
             message: 'server error creating health check',
@@ -74,7 +53,34 @@ const getHealthChecks = async (req, res) => {
     }
 };
 
+const getHealthCheckBySerialNumber = async (req, res) => {
+    try {
+        const { serialNumber } = req.params;
+        const healthCheck = await healthService.getHealthCheckBySerialNumber(serialNumber);
+        
+        if (!healthCheck) {
+            return res.status(404).json({
+                success: false,
+                message: 'Health check not found for this battery serial number',
+            });
+        }
+        
+        return res.status(200).json({
+            success: true,
+            message: 'Health check fetched successfully',
+            data: healthCheck
+        });
+
+    } catch (error) {
+        console.error('Error fetching health check by serial number:', error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'server error fetching health check by serial number',
+        });
+    }
+};
 module.exports = {
     createHealthCheck,
     getHealthChecks,
+    getHealthCheckBySerialNumber,
 };

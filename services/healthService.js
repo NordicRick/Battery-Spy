@@ -18,7 +18,7 @@ const getHealthChecks = async () => {
     try {
         const healthChecks = await healthCheckModel.findAll({ 
             raw: true,
-            attributes: ['id', 'internal_resistance', 'check_date', 'user_id', 'battery_serial_number', 'notes']
+            attributes: ['id', 'internal_resistance', 'check_date', 'battery_serial_number', 'user_name', 'notes']
         });
         return healthChecks;
     } catch (error) {
@@ -27,9 +27,24 @@ const getHealthChecks = async () => {
     }
 };
 
+const getHealthCheckBySerialNumber = async (serialNumber) => {
+    try {
+        const healthCheck = await healthCheckModel.findAll({ 
+            where: { battery_serial_number: serialNumber },
+            raw: true,
+            attributes: ['id', 'internal_resistance', 'check_date', 'battery_serial_number', 'user_name', 'notes']
+        });
+        return healthCheck;
+    } catch (error) {
+        console.error('Error fetching health check by serial number:', error.message);
+        throw error;
+    }
+};
+
 module.exports = {
     createHealthCheck,
     getHealthChecks,
+    getHealthCheckBySerialNumber,
     // getHealthCheckById, // not needed yet 
     // updateHealthCheck, // not needed yet 
     // deleteHealthCheck, // not needed yet 

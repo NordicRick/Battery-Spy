@@ -6,7 +6,7 @@ const healthChecksController = require('../controllers/healthChecks');
 
 router.post('/checks', healthChecksController.createHealthCheck);
 router.get('/checks', healthChecksController.getHealthChecks);
-//router.get('/healthChecks/:id', healthChecksController.getHealthCheckById);
+router.get('/checks/:serialNumber', healthChecksController.getHealthCheckBySerialNumber);
 //router.put('/healthChecks/:id', healthChecksController.updateHealthCheck);
 //router.delete('/healthChecks/:id', healthChecksController.deleteHealthCheck);
 
